@@ -20,6 +20,17 @@
       "prettier"
   ],
   "rules": {
-    "no-console": "off"
+    "no-console": "off",
+    "import/prefer-default-export": "off",
+    "semi": "error",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": ["module", "/^@/", ["parent", "sibling", "index"]],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ],
+    "prettier/prettier": ["error", { "endOfLine": "off" }]
   }
 }

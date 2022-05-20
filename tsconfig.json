@@ -1,6 +1,13 @@
 {
   "compilerOptions": {
     "sourceMap": true,
+    "experimentalDecorators": true, 
+    "baseUrl": "./src",  
+    "paths": {
+			"@modules/*": ["modules/*"],
+			"@database/*": ["database/*"],
+			"@shared/*": ["shared/*"]
+		},      
     "outDir": "dist",
     "strict": true,
     "lib": ["esnext"],
