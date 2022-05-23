@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe";
-import { prisma } from "@database/prismaClient";
+import { Clients } from "@prisma/client";
 import { hash } from "bcrypt";
 
 import { IClientsRepository } from "@modules/clients/repositories/IClientsRepository";
@@ -16,7 +16,7 @@ export class CreateClientUseCase {
     private clientsRepository: IClientsRepository
   ) {}
 
-  async execute({ username, password }: ICreateClient) {
+  async execute({ username, password }: ICreateClient): Promise<Clients> {
     const clientExists = await this.clientsRepository.findByUsername(username);
 
     if (clientExists) {

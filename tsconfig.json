@@ -6,7 +6,8 @@
     "paths": {
 			"@modules/*": ["modules/*"],
 			"@database/*": ["database/*"],
-			"@shared/*": ["shared/*"]
+			"@shared/*": ["shared/*"],
+			"@config/*": ["config/*"]
 		},      
     "outDir": "dist",
     "strict": true,

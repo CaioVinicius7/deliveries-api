@@ -1,5 +1,6 @@
 import express from "express";
 import "reflect-metadata";
+import "dotenv/config";
 
 import "@shared/container";
 
