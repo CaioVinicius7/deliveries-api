@@ -4,6 +4,7 @@ import { sign } from "jsonwebtoken";
 
 import { IAccountsRepository } from "@modules/accounts/repositories/IAccountsRepository";
 import { auth } from "@config/auth";
+import { AppError } from "@shared/errors/AppError";
 
 interface IAuthenticateClient {
   username: string;
@@ -28,13 +29,13 @@ export class AuthenticateClientUseCase {
     const client = await this.accountsRepository.verifyClient(username);
 
     if (!client) {
-      throw new Error("Username or password invalid!");
+      throw new AppError("Username or password invalid!");
     }
 
     const passwordMatch = await compare(password, client.password);
 
     if (!passwordMatch) {
-      throw new Error("Username or password invalid!");
+      throw new AppError("Username or password invalid!");
     }
 
     const token = sign(
