@@ -16,4 +16,14 @@ export class DeliveriesRepository implements IDeliveriesRepository {
 
     return result;
   }
+
+  async findAllWithoutEndDate(): Promise<Deliveries[]> {
+    const result = await prisma.deliveries.findMany({
+      where: {
+        end_at: null
+      }
+    });
+
+    return result;
+  }
 }
