@@ -44,7 +44,7 @@ export class AuthenticateDeliverymanUseCase {
       {
         username
       },
-      auth.secret_token as string,
+      auth.secret_token_deliveryman as string,
       {
         subject: deliveryman.id,
         expiresIn: auth.expires_in

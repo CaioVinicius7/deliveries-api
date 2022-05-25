@@ -8,7 +8,7 @@ interface IPayload {
   sub: string;
 }
 
-export async function ensureAuthenticateClient(
+export async function ensureAuthenticateDeliveryman(
   req: Request,
   res: Response,
   next: NextFunction
@@ -24,10 +24,10 @@ export async function ensureAuthenticateClient(
   try {
     const { sub } = verify(
       token,
-      auth.secret_token_client as string
+      auth.secret_token_deliveryman as string
     ) as IPayload;
 
-    req.id_client = sub;
+    req.id_deliveryman = sub;
 
     return next();
   } catch (err) {

@@ -42,7 +42,7 @@ export class AuthenticateClientUseCase {
       {
         username
       },
-      auth.secret_token as string,
+      auth.secret_token_client as string,
       {
         subject: client.id,
         expiresIn: auth.expires_in
