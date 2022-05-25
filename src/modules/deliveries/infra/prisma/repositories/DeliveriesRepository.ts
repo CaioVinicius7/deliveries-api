@@ -20,7 +20,34 @@ export class DeliveriesRepository implements IDeliveriesRepository {
   async findAllWithoutEndDate(): Promise<Deliveries[]> {
     const result = await prisma.deliveries.findMany({
       where: {
-        end_at: null
+        end_at: null,
+        id_deliveryman: null
+      }
+    });
+
+    return result;
+  }
+
+  async findById(id: string): Promise<Deliveries | null> {
+    const result = await prisma.deliveries.findUnique({
+      where: {
+        id
+      }
+    });
+
+    return result;
+  }
+
+  async updateDeliveryman(
+    id_delivery: string,
+    id_deliveryman: string
+  ): Promise<Deliveries> {
+    const result = await prisma.deliveries.update({
+      where: {
+        id: id_delivery
+      },
+      data: {
+        id_deliveryman
       }
     });
 
