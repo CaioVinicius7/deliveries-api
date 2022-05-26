@@ -53,4 +53,14 @@ export class DeliveriesRepository implements IDeliveriesRepository {
 
     return result;
   }
+
+  async findByClientId(id_client: string): Promise<Deliveries[]> {
+    const result = await prisma.deliveries.findMany({
+      where: {
+        id_client
+      }
+    });
+
+    return result;
+  }
 }
