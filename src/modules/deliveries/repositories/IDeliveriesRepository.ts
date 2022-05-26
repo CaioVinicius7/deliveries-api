@@ -9,6 +9,7 @@ interface IDeliveriesRepository {
     id_deliveryman: string
   ): Promise<Deliveries>;
   findByClientId(id_client: string): Promise<Deliveries[]>;
+  findByDeliverymanId(id_deliveryman: string): Promise<Deliveries[]>;
 }
 
 export { IDeliveriesRepository };
