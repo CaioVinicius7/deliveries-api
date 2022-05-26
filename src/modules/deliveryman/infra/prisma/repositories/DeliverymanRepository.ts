@@ -6,11 +6,9 @@ export class DeliverymanRepository implements IDeliverymanRepository {
   async findByUsername(username: string): Promise<Deliveryman | null> {
     const result = await prisma.deliveryman.findFirst({
       where: {
-        username,
-        AND: {
-          username: {
-            mode: "insensitive"
-          }
+        username: {
+          equals: username,
+          mode: "insensitive"
         }
       }
     });

@@ -6,11 +6,9 @@ export class ClientsRepository implements IClientsRepository {
   async findByUsername(username: string): Promise<Clients | null> {
     const result = await prisma.clients.findFirst({
       where: {
-        username,
-        AND: {
-          username: {
-            mode: "insensitive"
-          }
+        username: {
+          equals: username,
+          mode: "insensitive"
         }
       }
     });
