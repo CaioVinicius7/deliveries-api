@@ -73,4 +73,21 @@ export class DeliveriesRepository implements IDeliveriesRepository {
 
     return result;
   }
+
+  async updateEndDate(
+    id_delivery: string,
+    id_deliveryman: string
+  ): Promise<Object> {
+    const result = await prisma.deliveries.updateMany({
+      where: {
+        id: id_delivery,
+        id_deliveryman
+      },
+      data: {
+        end_at: new Date()
+      }
+    });
+
+    return result;
+  }
 }

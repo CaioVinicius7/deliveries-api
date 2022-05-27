@@ -10,6 +10,7 @@ interface IDeliveriesRepository {
   ): Promise<Deliveries>;
   findByClientId(id_client: string): Promise<Deliveries[]>;
   findByDeliverymanId(id_deliveryman: string): Promise<Deliveries[]>;
+  updateEndDate(id_delivery: string, id_deliveryman: string): Promise<Object>;
 }
 
 export { IDeliveriesRepository };
