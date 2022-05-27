@@ -1,8 +1,9 @@
 import { inject, injectable } from "tsyringe";
 
 import { IDeliveriesRepository } from "@modules/deliveries/repositories/IDeliveriesRepository";
-import { Deliveries } from "@prisma/client";
 import { AppError } from "@shared/errors/AppError";
+import { DeliveryMap } from "@modules/deliveries/mappers/DeliveryMap";
+import { IDeliveryResponseDTO } from "@modules/deliveries/dtos/IDeliveryResponseDTO";
 
 interface IUpdateDeliveryman {
   id_delivery: string;
@@ -19,7 +20,7 @@ export class UpdateDeliverymanUseCase {
   async execute({
     id_delivery,
     id_deliveryman
-  }: IUpdateDeliveryman): Promise<Deliveries> {
+  }: IUpdateDeliveryman): Promise<IDeliveryResponseDTO> {
     const deliveryExists = await this.deliveriesRepository.findById(
       id_delivery
     );
@@ -33,6 +34,6 @@ export class UpdateDeliverymanUseCase {
       id_deliveryman
     );
 
-    return delivery;
+    return DeliveryMap.toDTO(delivery);
   }
 }

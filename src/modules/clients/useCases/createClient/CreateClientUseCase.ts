@@ -4,6 +4,8 @@ import { hash } from "bcrypt";
 
 import { IClientsRepository } from "@modules/clients/repositories/IClientsRepository";
 import { AppError } from "@shared/errors/AppError";
+import { ClientMap } from "@modules/clients/mappers/ClientMap";
+import { IClientResponseDTO } from "@modules/clients/dtos/IClientResponseDTO";
 
 interface ICreateClient {
   username: string;
@@ -17,7 +19,10 @@ export class CreateClientUseCase {
     private clientsRepository: IClientsRepository
   ) {}
 
-  async execute({ username, password }: ICreateClient): Promise<Clients> {
+  async execute({
+    username,
+    password
+  }: ICreateClient): Promise<IClientResponseDTO> {
     const clientExists = await this.clientsRepository.findByUsername(username);
 
     if (clientExists) {
@@ -28,6 +33,6 @@ export class CreateClientUseCase {
 
     const client = await this.clientsRepository.create(username, hashPassword);
 
-    return client;
+    return ClientMap.toDTO(client);
   }
 }

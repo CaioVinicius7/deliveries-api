@@ -1,6 +1,8 @@
-import { IDeliveriesRepository } from "@modules/deliveries/repositories/IDeliveriesRepository";
-import { Deliveries } from "@prisma/client";
 import { inject, injectable } from "tsyringe";
+
+import { IDeliveryResponseDTO } from "@modules/deliveries/dtos/IDeliveryResponseDTO";
+import { IDeliveriesRepository } from "@modules/deliveries/repositories/IDeliveriesRepository";
+import { DeliveryMap } from "@modules/deliveries/mappers/DeliveryMap";
 
 @injectable()
 export class FindAllAvailableUseCase {
@@ -9,9 +11,13 @@ export class FindAllAvailableUseCase {
     private deliveriesRepository: IDeliveriesRepository
   ) {}
 
-  async execute(): Promise<Deliveries[]> {
+  async execute(): Promise<IDeliveryResponseDTO[]> {
     const deliveries = await this.deliveriesRepository.findAllWithoutEndDate();
 
-    return deliveries;
+    let deliveriesFormatted = deliveries.map((delivery) => {
+      return DeliveryMap.toDTO(delivery);
+    });
+
+    return deliveriesFormatted;
   }
 }

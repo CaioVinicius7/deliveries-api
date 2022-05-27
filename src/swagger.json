@@ -1,0 +1,596 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Deliveries API Documentation",
+		"description": "This is a deliveries service api",
+		"version": "1.0.0",
+		"contact": {
+			"email": "caio1525pereira@gmail.com"
+		}
+	},
+	"paths": {
+		"/client/authenticate": {
+			"post": {
+				"tags": [
+					"Authenticate"
+				],
+				"summary": "Authentication client",
+				"description": "Authentication client",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string",
+										"format": "password"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/Token"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Username or password invalid!"
+					}
+				}
+			}
+		},
+		"/deliveryman/authenticate": {
+			"post": {
+				"tags": [
+					"Authenticate"
+				],
+				"summary": "Authentication deliveryman",
+				"description": "Authentication deliveryman",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"username": {
+										"type": "string"
+									},
+									"password": {
+										"type": "string",
+										"format": "password"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/Token"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Username or password invalid!"
+					}
+				}
+			}
+		},
+		"/client": {
+			"post": {
+				"tags": [
+					"Client"
+				],
+				"summary": "Create client account",
+				"description": "Create client account",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/CreateClient"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/CreateClientSuccess"
+                }
+              }
+            }
+					},
+					"400": {
+						"description": "Client already exists!"
+					}
+				}
+			}
+		},
+		"/client/deliveries": {
+			"get": {
+				"tags": [
+					"Client"
+				],
+				"summary": "Get client deliveries",
+				"description": "Get client deliveries",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/ClientDeliveries"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+    "/deliveryman": {
+			"post": {
+				"tags": [
+					"Deliveryman"
+				],
+				"summary": "Create deliveryman account",
+				"description": "Create deliveryman account",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/definitions/CreateDeliveryman"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/CreateDeliverymanSuccess"
+                }
+              }
+            }
+					},
+					"400": {
+						"description": "Deliveryman already exists!"
+					}
+				}
+			}
+		},
+    "/deliveryman/deliveries": {
+			"get": {
+				"tags": [
+					"Deliveryman"
+				],
+				"summary": "Get deliveryman deliveries",
+				"description": "Get deliveryman deliveries (Requires deliveryman token)",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/DeliverymanDeliveries"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+    "/delivery/updateDeliveryman/{id}": {
+			"patch": {
+				"tags": [
+					"Deliveryman"
+				],
+				"summary": "Accept delivery",
+				"description": "Accept delivery (Requires deliveryman token)",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+        "parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "delivery id",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/Delivery"
+								}
+							}
+						}
+					},
+          "404": {
+            "description": "Delivery does not exists!"
+          }
+				}
+			}
+		},
+    "/delivery/updateEndDate/{id}": {
+			"patch": {
+				"tags": [
+					"Deliveryman"
+				],
+				"summary": "Finalize delivery",
+				"description": "Finalize delivery (Requires deliveryman token)",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+        "parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "delivery id",
+						"required": true,
+						"schema": {
+							"type": "string",
+							"format": "uuid"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "number"
+                    }
+                  }
+								}
+							}
+						}
+					},
+          "404": {
+            "description": "Delivery does not exists!"
+          }
+				}
+			}
+		},
+    "/delivery": {
+			"post": {
+				"tags": [
+					"Delivery"
+				],
+				"summary": "Create delivery",
+				"description": "Create delivery",
+        "security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "object",
+                "properties": {
+                  "item_name": {
+                    "type": "string"
+                  }
+                }
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/CreateDelivery"
+                }
+              }
+            }
+					}
+				}
+			}
+		},
+    "/delivery/available": {
+			"get": {
+				"tags": [
+					"Delivery"
+				],
+				"summary": "Get available delivery",
+				"description": "Get available delivery (Requires deliveryman token)",
+				"security": [
+					{
+						"bearerAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Success",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/definitions/AvailableDeliveries"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"CreateClient": {
+			"type": "object",
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string",
+          "format": "password"
+				}
+			}
+		},
+    "CreateClientSuccess": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+          "format": "uuid"
+				},
+				"username": {
+					"type": "string"
+				}
+			}
+		},
+    "ClientDeliveries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id_client": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id_deliveryman": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "item_name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "01/05/2022 10:49:01"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "01/05/2022 14:26:31"
+          }
+        }
+      }
+    },
+    "CreateDeliveryman": {
+			"type": "object",
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string",
+          "format": "password"
+				}
+			}
+		},
+    "CreateDeliverymanSuccess": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"type": "string",
+          "format": "uuid"
+				},
+				"username": {
+					"type": "string"
+				}
+			}
+		},
+    "DeliverymanDeliveries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id_client": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id_deliveryman": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "item_name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "01/05/2022 10:49:01"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time",
+            "example": "01/05/2022 14:26:31"
+          }
+        }
+      }
+    },
+    "Delivery": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "id_client": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "id_deliveryman": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "item_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "01/05/2022 10:49:01"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date-time",
+          "example": "01/05/2022 14:26:31"
+        }
+      }
+    },
+    "CreateDelivery": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "id_client": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "id_deliveryman": {
+          "type": "string",
+          "format": "uuid",
+          "example": null
+        },
+        "item_name": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "example": "01/05/2022 10:49:01"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date-time",
+          "example": null
+        }
+      }
+    },
+    "AvailableDeliveries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id_client": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "id_deliveryman": {
+            "type": "string",
+            "format": "uuid",
+            "example": null
+          },
+          "item_name": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "01/05/2022 10:49:01"
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date-time",
+            "example": null
+          }
+        }
+      }
+    },
+		"Token": {
+			"type": "object",
+			"properties": {
+				"token": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"components": {
+		"securitySchemes": {
+			"bearerAuth": {
+				"type": "http",
+				"scheme": "bearer",
+				"bearerFormat": "JWT"
+			}
+		}
+	}
+}

@@ -2,8 +2,9 @@ import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 
 import { IDeliverymanRepository } from "@modules/deliveryman/repositories/IDeliverymanRepository";
-import { Deliveryman } from "@prisma/client";
 import { AppError } from "@shared/errors/AppError";
+import { DeliverymanMap } from "@modules/deliveryman/mappers/DeliverymanMap";
+import { IDeliverymanResponseDTO } from "@modules/deliveryman/dtos/IDeliverymanResponseDTO";
 
 interface ICreateDeliveryman {
   username: string;
@@ -20,7 +21,7 @@ export class CreateDeliverymanUseCase {
   async execute({
     username,
     password
-  }: ICreateDeliveryman): Promise<Deliveryman> {
+  }: ICreateDeliveryman): Promise<IDeliverymanResponseDTO> {
     const deliverymanExists = await this.deliverymanRepository.findByUsername(
       username
     );
@@ -36,6 +37,6 @@ export class CreateDeliverymanUseCase {
       hashPassword
     );
 
-    return deliveryman;
+    return DeliverymanMap.toDTO(deliveryman);
   }
 }
