@@ -318,6 +318,12 @@
                 "properties": {
                   "item_name": {
                     "type": "string"
+                  },
+                  "initial_address": {
+                    "type": "string"
+                  },
+                  "final_address": {
+                    "type": "string"
                   }
                 }
 							}
@@ -410,6 +416,12 @@
           "item_name": {
             "type": "string"
           },
+          "initial_address": {
+            "type": "string"
+          },
+          "final_address": {
+            "type": "string"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -467,6 +479,12 @@
           "item_name": {
             "type": "string"
           },
+          "initial_address": {
+            "type": "string"
+          },
+          "final_address": {
+            "type": "string"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
@@ -498,6 +516,12 @@
         "item_name": {
           "type": "string"
         },
+        "initial_address": {
+          "type": "string"
+        },
+        "final_address": {
+          "type": "string"
+        },
         "created_at": {
           "type": "string",
           "format": "date-time",
@@ -527,6 +551,12 @@
           "example": null
         },
         "item_name": {
+          "type": "string"
+        },
+        "initial_address": {
+          "type": "string"
+        },
+        "final_address": {
           "type": "string"
         },
         "created_at": {

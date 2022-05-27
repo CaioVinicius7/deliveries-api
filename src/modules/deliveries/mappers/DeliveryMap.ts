@@ -12,6 +12,8 @@ class DeliveryMap {
     id_client,
     id_deliveryman,
     item_name,
+    initial_address,
+    final_address,
     created_at,
     end_at
   }: Deliveries): IDeliveryResponseDTO {
@@ -20,6 +22,8 @@ class DeliveryMap {
       id_client,
       id_deliveryman,
       item_name,
+      initial_address,
+      final_address,
       created_at: dateProvider.formatToLocal(created_at),
       end_at: end_at ? dateProvider.formatToLocal(end_at) : end_at
     };

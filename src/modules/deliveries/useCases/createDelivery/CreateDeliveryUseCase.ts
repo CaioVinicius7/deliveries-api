@@ -1,14 +1,9 @@
 import { inject, injectable } from "tsyringe";
 
 import { IDeliveriesRepository } from "@modules/deliveries/repositories/IDeliveriesRepository";
-import { Deliveries } from "@prisma/client";
 import { DeliveryMap } from "@modules/deliveries/mappers/DeliveryMap";
 import { IDeliveryResponseDTO } from "@modules/deliveries/dtos/IDeliveryResponseDTO";
-
-interface ICreateDelivery {
-  item_name: string;
-  id_client: string;
-}
+import { ICreateDeliveryDTO } from "@modules/deliveries/dtos/ICreateDeliveryDTO";
 
 @injectable()
 export class CreateDeliveryUseCase {
@@ -19,12 +14,16 @@ export class CreateDeliveryUseCase {
 
   async execute({
     item_name,
+    initial_address,
+    final_address,
     id_client
-  }: ICreateDelivery): Promise<IDeliveryResponseDTO> {
-    const delivery = await this.deliveriesRepository.createDelivery(
+  }: ICreateDeliveryDTO): Promise<IDeliveryResponseDTO> {
+    const delivery = await this.deliveriesRepository.createDelivery({
       item_name,
+      initial_address,
+      final_address,
       id_client
-    );
+    });
 
     return DeliveryMap.toDTO(delivery);
   }

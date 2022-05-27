@@ -1,7 +1,8 @@
 import { Deliveries } from "@prisma/client";
+import { ICreateDeliveryDTO } from "../dtos/ICreateDeliveryDTO";
 
 interface IDeliveriesRepository {
-  createDelivery(item_name: string, id_client: string): Promise<Deliveries>;
+  createDelivery(data: ICreateDeliveryDTO): Promise<Deliveries>;
   findAllWithoutEndDate(): Promise<Deliveries[]>;
   findById(id: string): Promise<Deliveries | null>;
   updateDeliveryman(
