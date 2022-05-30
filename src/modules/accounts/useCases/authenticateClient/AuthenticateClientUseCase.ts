@@ -40,7 +40,8 @@ export class AuthenticateClientUseCase {
 
     const token = sign(
       {
-        username
+        username,
+        phone: client.phone
       },
       auth.secret_token_client as string,
       {

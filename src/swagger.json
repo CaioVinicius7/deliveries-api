@@ -121,7 +121,7 @@
             }
 					},
 					"400": {
-						"description": "Client already exists!"
+						"description": "Client already exists! or A client register with this phone already exists!"
 					}
 				}
 			}
@@ -381,7 +381,11 @@
 				"password": {
 					"type": "string",
           "format": "password"
-				}
+				},
+        "phone": {
+          "type": "string",
+          "example": "+5535940028922"
+        }
 			}
 		},
     "CreateClientSuccess": {
@@ -393,7 +397,10 @@
 				},
 				"username": {
 					"type": "string"
-				}
+				},
+        "phone": {
+          "type": "string"
+        }
 			}
 		},
     "ClientDeliveries": {

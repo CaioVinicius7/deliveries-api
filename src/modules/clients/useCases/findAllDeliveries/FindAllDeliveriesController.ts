@@ -5,7 +5,7 @@ import { FindAllDeliveriesUseCase } from "./FindAllDeliveriesUseCase";
 
 export class FindAllDeliveriesController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { id_client } = req;
+    const { id: id_client } = req.client;
 
     const findAllDeliveriesUseCase = container.resolve(
       FindAllDeliveriesUseCase

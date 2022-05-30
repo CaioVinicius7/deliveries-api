@@ -6,6 +6,7 @@ import { AppError } from "@shared/errors/AppError";
 
 interface IPayload {
   sub: string;
+  phone: string;
 }
 
 export async function ensureAuthenticateClient(
@@ -22,12 +23,13 @@ export async function ensureAuthenticateClient(
   const [, token] = authHeader.split(" ");
 
   try {
-    const { sub } = verify(
+    const { sub, phone } = verify(
       token,
       auth.secret_token_client as string
     ) as IPayload;
 
-    req.id_client = sub;
+    req.client.id = sub;
+    req.client.phone = phone;
 
     return next();
   } catch (err) {

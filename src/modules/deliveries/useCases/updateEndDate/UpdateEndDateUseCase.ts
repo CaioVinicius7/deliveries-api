@@ -3,6 +3,7 @@ import { inject, injectable } from "tsyringe";
 import { IDeliveriesRepository } from "@modules/deliveries/repositories/IDeliveriesRepository";
 import { Deliveries } from "@prisma/client";
 import { AppError } from "@shared/errors/AppError";
+import { ISmsProvider } from "@shared/container/providers/smsProvider/ISmsProvider";
 
 interface IUpdateEndDate {
   id_delivery: string;
@@ -13,7 +14,9 @@ interface IUpdateEndDate {
 export class UpdateEndDateUseCase {
   constructor(
     @inject("DeliveriesRepository")
-    private deliveriesRepository: IDeliveriesRepository
+    private deliveriesRepository: IDeliveriesRepository,
+    @inject("SmsProvider")
+    private smsProvider: ISmsProvider
   ) {}
 
   async execute({
@@ -32,6 +35,11 @@ export class UpdateEndDateUseCase {
       id_delivery,
       id_deliveryman
     );
+
+    // @ts-ignore
+    const { phone: client_phone } = deliveryExists.client;
+
+    await this.smsProvider.deliveryCompletion(client_phone);
 
     return delivery;
   }

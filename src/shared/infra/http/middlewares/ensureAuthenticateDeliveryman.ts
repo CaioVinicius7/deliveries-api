@@ -6,6 +6,7 @@ import { AppError } from "@shared/errors/AppError";
 
 interface IPayload {
   sub: string;
+  username: string;
 }
 
 export async function ensureAuthenticateDeliveryman(
@@ -22,12 +23,13 @@ export async function ensureAuthenticateDeliveryman(
   const [, token] = authHeader.split(" ");
 
   try {
-    const { sub } = verify(
+    const { sub, username } = verify(
       token,
       auth.secret_token_deliveryman as string
     ) as IPayload;
 
     req.id_deliveryman = sub;
+    req.username_deliveryman = username;
 
     return next();
   } catch (err) {

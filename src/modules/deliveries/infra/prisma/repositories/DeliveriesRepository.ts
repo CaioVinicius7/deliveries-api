@@ -37,6 +37,13 @@ export class DeliveriesRepository implements IDeliveriesRepository {
     const result = await prisma.deliveries.findUnique({
       where: {
         id
+      },
+      include: {
+        client: {
+          select: {
+            phone: true
+          }
+        }
       }
     });
 

@@ -16,11 +16,26 @@ export class ClientsRepository implements IClientsRepository {
     return result;
   }
 
-  async create(username: string, password: string): Promise<Clients> {
+  async findByPhone(phone: number): Promise<Clients | null> {
+    const result = await prisma.clients.findUnique({
+      where: {
+        phone
+      }
+    });
+
+    return result;
+  }
+
+  async create(
+    username: string,
+    password: string,
+    phone: number
+  ): Promise<Clients> {
     const result = await prisma.clients.create({
       data: {
         username,
-        password
+        password,
+        phone
       }
     });
 
