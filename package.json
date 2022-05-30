@@ -14,6 +14,7 @@
     "@types/jest": "^27.5.1",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/twilio": "^3.19.3",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
     "eslint": "^7.32.0 || ^8.2.0",
@@ -27,7 +28,8 @@
     "prisma": "^3.14.0",
     "ts-jest": "^28.0.3",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "uuid": "^8.3.2"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
