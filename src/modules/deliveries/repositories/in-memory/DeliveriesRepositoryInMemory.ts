@@ -27,7 +27,11 @@ export class DeliveriesRepositoryInMemory implements IDeliveriesRepository {
   }
 
   async findAllWithoutEndDate(): Promise<Deliveries[]> {
-    throw new Error("Method not implemented.");
+    const result = this.deliveries.filter(
+      (delivery) => delivery.end_at === null
+    );
+
+    return result;
   }
 
   async findById(id: string): Promise<Deliveries | null> {
