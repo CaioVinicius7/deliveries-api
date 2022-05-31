@@ -38,7 +38,16 @@ export class DeliveriesRepositoryInMemory implements IDeliveriesRepository {
     id_delivery: string,
     id_deliveryman: string
   ): Promise<Deliveries> {
-    throw new Error("Method not implemented.");
+    const delivery = this.deliveries.find(
+      (delivery) => delivery.id === id_delivery
+    );
+
+    Object.assign(delivery, {
+      id_deliveryman
+    });
+
+    // @ts-ignore
+    return delivery;
   }
 
   async findByClientId(id_client: string): Promise<Deliveries[]> {
@@ -50,7 +59,11 @@ export class DeliveriesRepositoryInMemory implements IDeliveriesRepository {
   }
 
   async findByDeliverymanId(id_deliveryman: string): Promise<Deliveries[]> {
-    throw new Error("Method not implemented.");
+    const result = this.deliveries.filter(
+      (delivery) => delivery.id_deliveryman === id_deliveryman
+    );
+
+    return result;
   }
 
   async updateEndDate(
