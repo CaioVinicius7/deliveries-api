@@ -4,7 +4,7 @@ import { FindAllDeliveriesUseCase } from "./FindAllDeliveriesUseCase";
 let findAllDeliveriesUseCase: FindAllDeliveriesUseCase;
 let deliveriesRepositoryInMemory: DeliveriesRepositoryInMemory;
 
-describe("Find All Deliveries - Client", () => {
+describe("Find All Deliveries - Deliveryman", () => {
   beforeEach(() => {
     deliveriesRepositoryInMemory = new DeliveriesRepositoryInMemory();
     findAllDeliveriesUseCase = new FindAllDeliveriesUseCase(

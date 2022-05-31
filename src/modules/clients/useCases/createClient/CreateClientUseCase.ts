@@ -1,5 +1,4 @@
 import { inject, injectable } from "tsyringe";
-import { Clients } from "@prisma/client";
 import { hash } from "bcrypt";
 
 import { IClientsRepository } from "@modules/clients/repositories/IClientsRepository";
