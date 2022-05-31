@@ -1,2 +1,2 @@
-process.env.SECRET_TOKEN_CLIENT = "151e182e30aa15283e1629f296da0d06";
-process.env.SECRET_TOKEN_DELIVERYMAN = "9382c8a13cb2f655e70bba3319351386";
+process.env.SECRET_TOKEN_CLIENT = "superSecretClientPassword";
+process.env.SECRET_TOKEN_DELIVERYMAN = "superSecretDeliverymanPassword";
