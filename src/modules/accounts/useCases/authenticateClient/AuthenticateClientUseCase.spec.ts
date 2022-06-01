@@ -39,7 +39,7 @@ describe("Authenticate Client", () => {
         username: "Charlie Meyer",
         password: "92203070"
       })
-    ).rejects.toEqual(new AppError("Username or password invalid!"));
+    ).rejects.toEqual(new AppError("Username or password invalid!", 401));
   });
 
   it("Should not be able to authenticate a client with incorrect password", async () => {
@@ -48,6 +48,6 @@ describe("Authenticate Client", () => {
         username: "Willie Sharp",
         password: "84510923"
       })
-    ).rejects.toEqual(new AppError("Username or password invalid!"));
+    ).rejects.toEqual(new AppError("Username or password invalid!", 401));
   });
 });
