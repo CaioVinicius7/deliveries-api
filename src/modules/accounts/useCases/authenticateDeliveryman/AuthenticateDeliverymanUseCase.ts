@@ -31,13 +31,13 @@ export class AuthenticateDeliverymanUseCase {
     );
 
     if (!deliveryman) {
-      throw new AppError("Username or password invalid!");
+      throw new AppError("Username or password invalid!", 401);
     }
 
     const passwordMatch = await compare(password, deliveryman.password);
 
     if (!passwordMatch) {
-      throw new AppError("Username or password invalid!");
+      throw new AppError("Username or password invalid!", 401);
     }
 
     const token = sign(

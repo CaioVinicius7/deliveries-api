@@ -38,7 +38,7 @@ describe("Authenticate Deliveryman", () => {
         username: "Katharine Roberson",
         password: "60353442"
       })
-    ).rejects.toEqual(new AppError("Username or password invalid!"));
+    ).rejects.toEqual(new AppError("Username or password invalid!", 401));
   });
 
   it("Should not be able to authenticate a deliveryman with incorrect password", async () => {
@@ -47,6 +47,6 @@ describe("Authenticate Deliveryman", () => {
         username: "Connor Lloyd",
         password: "84510923"
       })
-    ).rejects.toEqual(new AppError("Username or password invalid!"));
+    ).rejects.toEqual(new AppError("Username or password invalid!", 401));
   });
 });
