@@ -29,13 +29,13 @@ export class AuthenticateClientUseCase {
     const client = await this.accountsRepository.verifyClient(username);
 
     if (!client) {
-      throw new AppError("Username or password invalid!");
+      throw new AppError("Username or password invalid!", 401);
     }
 
     const passwordMatch = await compare(password, client.password);
 
     if (!passwordMatch) {
-      throw new AppError("Username or password invalid!");
+      throw new AppError("Username or password invalid!", 401);
     }
 
     const token = sign(

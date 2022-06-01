@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --exit-child --transpile-only --ignore-watch node_modules ./src/shared/infra/http/server.ts",
-    "migrate:test": "cross-env DATABASE_URL=\"postgresql://docker:delivery_project@localhost:5432/deliveries_test?schema=public\" prisma migrate deploy",
+    "db:test": "cross-env DATABASE_URL=\"postgresql://docker:delivery_project@localhost:5432/deliveries_test?schema=public\" prisma migrate deploy",
     "test": "jest --runInBand"
   },
   "devDependencies": {
