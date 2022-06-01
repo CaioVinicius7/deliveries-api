@@ -52,7 +52,7 @@ describe("Update End Date", () => {
     ).rejects.toEqual(new AppError("Delivery does not exists!", 404));
   });
 
-  it("Should not be able to update the end date with the id of a different deliveryman than the one responsible for it", async () => {
+  it("Should not be able to update the end date with the id of a different deliveryman than the one responsible for this delivery", async () => {
     const delivery = await deliveriesRepositoryInMemory.createDelivery({
       id_client: "96af2849-60f0-4ceb-8c8a-5db12ba004da",
       item_name: "Headset Redragon Zeus RGB",
