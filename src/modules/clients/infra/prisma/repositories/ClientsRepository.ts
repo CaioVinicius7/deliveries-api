@@ -16,7 +16,7 @@ export class ClientsRepository implements IClientsRepository {
     return result;
   }
 
-  async findByPhone(phone: number): Promise<Clients | null> {
+  async findByPhone(phone: string): Promise<Clients | null> {
     const result = await prisma.clients.findUnique({
       where: {
         phone
@@ -29,7 +29,7 @@ export class ClientsRepository implements IClientsRepository {
   async create(
     username: string,
     password: string,
-    phone: number
+    phone: string
   ): Promise<Clients> {
     const result = await prisma.clients.create({
       data: {
