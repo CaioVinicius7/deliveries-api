@@ -1,7 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
 import { IDeliveriesRepository } from "@modules/deliveries/repositories/IDeliveriesRepository";
-import { Deliveries } from "@prisma/client";
 import { AppError } from "@shared/errors/AppError";
 import { ISmsProvider } from "@shared/container/providers/smsProvider/ISmsProvider";
 

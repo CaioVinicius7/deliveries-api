@@ -83,6 +83,21 @@ export class DeliveriesRepositoryInMemory implements IDeliveriesRepository {
     id_delivery: string,
     id_deliveryman: string
   ): Promise<Object> {
-    throw new Error("Method not implemented.");
+    const delivery = this.deliveries.find(
+      (delivery) =>
+        delivery.id === id_delivery &&
+        delivery.id_deliveryman === id_deliveryman
+    );
+
+    if (delivery) {
+      Object.assign(delivery, {
+        end_at: new Date()
+      });
+    }
+
+    // @ts-ignore
+    return {
+      count: delivery ? 1 : 0
+    };
   }
 }
