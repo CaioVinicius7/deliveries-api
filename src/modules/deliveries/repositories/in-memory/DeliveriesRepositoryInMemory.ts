@@ -3,14 +3,15 @@ import { v4 as uuidV4 } from "uuid";
 
 import { ICreateDeliveryDTO } from "@modules/deliveries/dtos/ICreateDeliveryDTO";
 import { IDeliveriesRepository } from "../IDeliveriesRepository";
+import { IDeliveryTestDTO } from "@modules/deliveries/dtos/IDeliveryTestDTO";
 
 export class DeliveriesRepositoryInMemory implements IDeliveriesRepository {
-  private deliveries: Deliveries[] = [];
+  private deliveries: IDeliveryTestDTO[] = [];
 
   async createDelivery(data: ICreateDeliveryDTO): Promise<Deliveries> {
     const { id_client, item_name, initial_address, final_address } = data;
 
-    const delivery: Deliveries = {
+    const delivery: IDeliveryTestDTO = {
       id: uuidV4(),
       id_client,
       id_deliveryman: null,
@@ -18,7 +19,13 @@ export class DeliveriesRepositoryInMemory implements IDeliveriesRepository {
       initial_address,
       final_address,
       created_at: new Date(),
-      end_at: null
+      end_at: null,
+      client: {
+        id: "423dea89-8436-4fd5-af00-5313159dc846",
+        username: "Anthony Harrington",
+        password: "97442126",
+        phone: "+5535940028922"
+      }
     };
 
     this.deliveries.push(delivery);
@@ -35,7 +42,9 @@ export class DeliveriesRepositoryInMemory implements IDeliveriesRepository {
   }
 
   async findById(id: string): Promise<Deliveries | null> {
-    throw new Error("Method not implemented.");
+    const result = this.deliveries.find((delivery) => delivery.id === id);
+
+    return result || null;
   }
 
   async updateDeliveryman(

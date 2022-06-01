@@ -7,6 +7,7 @@ interface IDeliveryResponseDTO {
   final_address: string;
   created_at: String;
   end_at: string | null;
+  client?: string;
 }
 
 export { IDeliveryResponseDTO };
