@@ -20,6 +20,7 @@ O sistema conta com as seguintes funcionalidades:
 - Cadastro de entregas
 - Listagem de entregas disponíveis
 - Listagem de entregas de cliente e entregadores
+- Disparo de sms após o cliente se cadastrar, após a entrega ser aceita e após a entrega ser concluida
 
 Caso queira ver as funcionalidades por completo e de modo técnico acesse a documentação do projeto ([clique aqui](#docs) para ver como acessá-la).
 
@@ -57,6 +58,11 @@ $ yarn dev
 # O servidor ficara ativo na porta:3333 - acesse <http://localhost:3333>
 ```
 
+## 🛠 Como rodar os testes
+Para rodar os testes rode o script ``db:test`` após ter rodado os containers e depois rode o script ``test``.
+
+Obs: Caso você altere as os dados do container de postgres(db, port, username ou password) ou resolva utilizar o postegres de sua máquina altere o script ``db:test`` mudando os dados atribuidos a ``DATABASE_URL`` para os dados corretos da sua conexão. 
+ 
 <div id="docs"> </div>
 
 ## 📜 Acessando a documentação
